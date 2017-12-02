@@ -141,7 +141,7 @@ class ItemCategoryController extends Controller
                 $errMess = $e->getMessage();
                 return Redirect::back()->withErrors($errMess);
             }
-            $request->session()->flash('success', 'Successfully added.');  
+            $request->session()->flash('success', 'Successfully updated.');  
             return Redirect('category');
         }
     }
@@ -152,7 +152,7 @@ class ItemCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         try{
             DB::beginTransaction();

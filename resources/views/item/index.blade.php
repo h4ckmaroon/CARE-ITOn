@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/datatables/datatables-responsive/css/dataTables.responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/plugins/pace/pace.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/plugins/select2/select2.min.css') }}">
 @endsection
 
 @section('content')
@@ -104,6 +105,17 @@
                                     @include('layouts.required')
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            {!! Form::label('categoryId', 'Category') !!}<span>*</span>
+                                            <select id="createCategory" name="categoryId" class="select2 form-control" required>
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row"></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             {!! Form::label('name', 'Item') !!}<span>*</span>
                                             {!! Form::input('text','name',null,[
                                                 'class' => 'form-control',
@@ -115,12 +127,13 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!! Form::label('categoryId', 'Category') !!}<span>*</span>
-                                            <select id="categoryId" name="categoryId" class="select2 form-control" required>
-                                                <option value="1">Length</option>
-                                                <option value="2">Mass</option>
-                                                <option value="3">Volume</option>
-                                            </select>
+                                            {!! Form::label('rate', 'Rate') !!}<span>*</span>
+                                            {!! Form::input('text','rate',null,[
+                                                'class' => 'form-control',
+                                                'placeholder'=>'Rate',
+                                                'maxlength'=>'50',
+                                                'required']) 
+                                            !!}
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -158,13 +171,36 @@
                                 <div class="row">
                                     @include('layouts.required')
                                     <input id="itemId" name="id" type="hidden">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            {!! Form::label('name', 'Category') !!}<span>*</span>
+                                            {!! Form::label('categoryId', 'Category') !!}<span>*</span>
+                                            <select id="updateCategory" name="categoryId" class="select2 form-control" required>
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row"></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {!! Form::label('name', 'Item') !!}<span>*</span>
                                             {!! Form::input('text','name',null,[
                                                 'id'=>'itemName',
                                                 'class' => 'form-control',
                                                 'placeholder'=>'Name',
+                                                'maxlength'=>'50',
+                                                'required']) 
+                                            !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {!! Form::label('rate', 'Rate') !!}<span>*</span>
+                                            {!! Form::input('text','rate',null,[
+                                                'id'=>'itemRate',
+                                                'class' => 'form-control',
+                                                'placeholder'=>'Rate',
                                                 'maxlength'=>'50',
                                                 'required']) 
                                             !!}
@@ -193,6 +229,7 @@
                     </div>
                 </div>
                 @include('layouts.deactivateModal')
+                @include('layouts.reactivateModal')
             </div>
         </div>
     </div>
@@ -203,6 +240,7 @@
     <script src="{{ URL::asset('assets/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('assets/datatables/datatables-responsive/js/dataTables.responsive.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/select2/select2.full.min.js') }}"></script>
     <script src="{{ URL::asset('js/record.js') }}"></script>
     <script>
         $(document).ajaxStart(function() { Pace.restart(); });
@@ -213,6 +251,7 @@
             $('#dlist').DataTable({
                 responsive: true,
             });
+            $(".select2").select2();
             $('#mItem').addClass('active');
         });
         function updateModal(id){
@@ -223,7 +262,10 @@
 				success:function(data){
                     $("#itemId").val(data.item.id);
 					$("#itemName").val(data.item.name);
+					$("#itemRate").val(data.item.rate);
                     $("#itemDesc").val(data.item.description);
+                    $('#updateCategory').val(data.item.categoryId);
+                    $(".select2").select2();
 				}
 			});
             $('#updateModal').modal('show');
