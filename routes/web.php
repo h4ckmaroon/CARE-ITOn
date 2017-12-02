@@ -39,4 +39,5 @@ Route::group(['middleware'=>'auth'],function(){
         'index','store','edit','update','destroy']]);
     Route::patch('/collector/{$id}','CollectorController@reactivate');   
     Route::resource('/request','RequestController');
+    Route::resource('/collection','CollectionController');
 });

@@ -7,6 +7,8 @@ use App\Item;
 use App\ItemCategory;
 use App\RequestHeader;
 use App\RequestDetail;
+use App\User;
+use Auth;
 use Validator;
 use Redirect;
 use Session;
@@ -22,7 +24,7 @@ class RequestController extends Controller
      */
     public function index()
     {
-        $requests = RequestHeader::all();
+        $requests = RequestHeader::where('userId',Auth::id())->get();
         return View('request.index',compact('requests'));
     }
 

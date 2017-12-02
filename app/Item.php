@@ -18,4 +18,8 @@ class Item extends Model
     public function category(){
     	return $this->belongsTo('App\ItemCategory', 'categoryId');
     }
+
+    public function rate(){
+        return $this->hasMany('App\ItemRate', 'itemId');
+    }
 }
