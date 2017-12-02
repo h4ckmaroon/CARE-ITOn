@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('/dashboard','DashboardController',['only' => [
         'index']]);
+    Route::post('/dashboard','DashboardController@checkCode');
     Route::resource('/category','ItemCategoryController',['only' => [
         'index','store','edit','update','destroy']]);
     Route::patch('/category/{$id}','ItemCategoryController@reactivate');
