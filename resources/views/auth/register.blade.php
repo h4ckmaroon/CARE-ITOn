@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    {!! Form::label('accountNo', 'Account No.') !!}<span>*</span>
+                                    {!! Form::label('accountNo', 'Account No. (UnionBank)') !!}<span>*</span>
                                     {!! Form::input('text','accountNo',null,[
                                         'class' => 'form-control',
                                         'id' => 'accountNo',
@@ -117,4 +117,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#email').inputmask("email");
+        $('#contactNo').inputmask("(9999) 999-9999");
+        $('#accountNo').inputmask("999999999999");
+    });
+        
+</script>
 @endsection

@@ -253,6 +253,24 @@
             });
             $(".select2").select2();
             $('#mItem').addClass('active');
+
+            $("#rate").inputmask({
+                'alias': 'numeric', 
+                'groupSeparator': ',', 
+                'autoGroup': true, 
+                'digits': 2, 
+                'digitsOptional': false,
+                'allowMinus' : false,
+            });
+
+            $("#itemRate").inputmask({
+                'alias': 'numeric', 
+                'groupSeparator': ',', 
+                'autoGroup': true, 
+                'digits': 2, 
+                'digitsOptional': false,
+                'allowMinus' : false,
+            });
         });
         function updateModal(id){
             $.ajax({

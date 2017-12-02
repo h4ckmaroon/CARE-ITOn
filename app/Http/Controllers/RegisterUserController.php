@@ -76,7 +76,7 @@ class RegisterUserController extends Controller
         }
         else{
             try{
-                DB::beginTransaction();
+                // DB::beginTransaction();
                 $user = User::create([
                     'username' => trim($request->username),
                     'password' => bcrypt(trim($request->password)),

@@ -148,6 +148,13 @@
 <script src="{{ URL::asset('assets/plugins/fastclick/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{ URL::asset('assets/dist/js/app.min.js')}}"></script>
+<!-- Input Mask -->
+<script src="{{ URL::asset('assets/plugins/input-mask/inputmask.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/input-mask/inputmask.extensions.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/input-mask/inputmask.numeric.extensions.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/input-mask/inputmask.phone.extensions.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/input-mask/jquery.inputmask.js') }}"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="{{ URL::asset('assets/dist/js/demo.js')}}"></script>
 <script src="{{ URL::asset('assets/plugins/daterangepicker/moment.min.js') }}"></script>

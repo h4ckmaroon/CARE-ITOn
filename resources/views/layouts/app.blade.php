@@ -8,6 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+
     <title>CARE-ITOn</title>
 
     <!-- Styles -->
@@ -82,6 +88,13 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ URL::asset('js/app.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/jQuery/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/input-mask/inputmask.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/input-mask/inputmask.extensions.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/input-mask/inputmask.numeric.extensions.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/input-mask/inputmask.phone.extensions.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/input-mask/jquery.inputmask.js') }}"></script>
+    @yield('js')
 </body>
 </html>
