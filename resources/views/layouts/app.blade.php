@@ -12,13 +12,14 @@
 
     <!-- Styles -->
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/AdminLTE.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/skins/_all-skins.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.min.css') }}"  />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}" /> 
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/jquery/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/bootstrap/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/bootstrap/css/ionicons.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/iCheck/all.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/dist/css/skins/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/custom.css') }}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" /> 
 </head>
 <body>

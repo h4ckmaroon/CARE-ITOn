@@ -1,10 +1,3 @@
-{{-- Needed variables across views. Init here --}}
-@php 
-$helper_block_desc="";
-$has_helper = false;
-$main = 0;
-@endphp
-
 <!DOCTYPE html>
 <html>
 <head>

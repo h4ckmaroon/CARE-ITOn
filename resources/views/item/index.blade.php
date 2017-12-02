@@ -115,13 +115,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!! Form::label('category', 'Category') !!}<span>*</span>
-                                            {!! Form::input('text','name',null,[
-                                                'class' => 'form-control',
-                                                'placeholder'=>'Name',
-                                                'maxlength'=>'50',
-                                                'required']) 
-                                            !!}
+                                            {!! Form::label('categoryId', 'Category') !!}<span>*</span>
+                                            <select id="categoryId" name="categoryId" class="select2 form-control" required>
+                                                <option value="1">Length</option>
+                                                <option value="2">Mass</option>
+                                                <option value="3">Volume</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
