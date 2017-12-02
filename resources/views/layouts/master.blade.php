@@ -1,3 +1,11 @@
+@php
+  use App\User;
+  $idLog = Auth::id();
+  $userLog = User::find($idLog);
+  $wholeName = $userLog->detail->firstName.' '.$userLog->detail->lastName;
+  $userName = $userLog->username;
+  $userPicture = $userLog->detail->photo
+@endphp
 <!DOCTYPE html>
 <html>
 <head>
