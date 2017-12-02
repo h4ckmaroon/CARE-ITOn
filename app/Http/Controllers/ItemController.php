@@ -21,7 +21,7 @@ class ItemController extends Controller
         $items = Item::where('isActive',1)->orderBy('name')->get();
         $deactivate = Item::where('isActive',0)->orderBy('name')->get();
         $categories = ItemCategory::where('isActive',1)->orderBy('name')->get();
-        return View('item.index',compact('items','deactivate','categories'));
+        return View('item',compact('items','deactivate','categories'));
     }
 
     /**

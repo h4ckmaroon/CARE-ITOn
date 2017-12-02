@@ -14,6 +14,7 @@ class CreateRequestHeaderTable extends Migration
     public function up()
     {
         Schema::create('request_header', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('userId');
             $table->string('location');

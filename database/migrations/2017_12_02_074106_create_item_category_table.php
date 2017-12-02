@@ -14,6 +14,7 @@ class CreateItemCategoryTable extends Migration
     public function up()
     {
         Schema::create('item_category', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name',50);
             $table->string('description',140)->nullable();

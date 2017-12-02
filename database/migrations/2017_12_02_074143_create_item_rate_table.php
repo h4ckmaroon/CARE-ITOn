@@ -14,6 +14,7 @@ class CreateItemRateTable extends Migration
     public function up()
     {
         Schema::create('item_rate', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('itemId');
             $table->double('rate',15,2);
             $table->timestamps();

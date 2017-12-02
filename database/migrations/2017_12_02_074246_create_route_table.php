@@ -14,6 +14,7 @@ class CreateRouteTable extends Migration
     public function up()
     {
         Schema::create('route', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('requestId');
             $table->unsignedInteger('collectorId');

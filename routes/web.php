@@ -30,4 +30,6 @@ Route::group(['middleware'=>'auth'],function(){
     Route::patch('/category/{$id}','ItemCategoryController@reactivate');
     Route::resource('/item','ItemController',['only' => [
         'index','store','edit','update','destroy']]);
+    Route::patch('/item/{$id}','ItemController@reactivate');
+    Route::resource('/user-control','UserController');
 });

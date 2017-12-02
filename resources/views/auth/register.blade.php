@@ -43,17 +43,6 @@
                                     !!}
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    {!! Form::label('accountNo', 'Account No.') !!}<span>*</span>
-                                    {!! Form::input('text','accountNo',null,[
-                                        'class' => 'form-control',
-                                        'id' => 'accountNo',
-                                        'placeholder'=>'Account No.',
-                                        'maxlength'=>'12']) 
-                                    !!}
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('firstName', 'First Name') !!}<span>*</span>
@@ -87,7 +76,7 @@
                                     !!}
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('contactNo', 'Contact No.') !!}<span>*</span>
                                     {!! Form::input('text','contactNo',null,[
@@ -98,7 +87,7 @@
                                     !!}
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('email', 'Email') !!}<span>*</span>
                                     {!! Form::input('text','email',null,[
@@ -106,6 +95,17 @@
                                         'id' => 'email',
                                         'placeholder'=>'Email',
                                         'maxlength'=>'50']) 
+                                    !!}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label('accountNo', 'Account No.') !!}<span>*</span>
+                                    {!! Form::input('text','accountNo',null,[
+                                        'class' => 'form-control',
+                                        'id' => 'accountNo',
+                                        'placeholder'=>'Account No.',
+                                        'maxlength'=>'12']) 
                                     !!}
                                 </div>
                             </div>

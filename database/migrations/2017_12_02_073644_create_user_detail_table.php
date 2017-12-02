@@ -14,6 +14,7 @@ class CreateUserDetailTable extends Migration
     public function up()
     {
         Schema::create('user_detail', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('userId');
             $table->string('firstName',50);
             $table->string('middleName',50)->nullable();

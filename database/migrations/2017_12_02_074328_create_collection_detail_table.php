@@ -14,6 +14,7 @@ class CreateCollectionDetailTable extends Migration
     public function up()
     {
         Schema::create('collection_detail', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('collectionId');
             $table->unsignedInteger('itemId');
             $table->integer('quantity');

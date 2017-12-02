@@ -14,6 +14,7 @@ class CreateUtilitiesTable extends Migration
     public function up()
     {
         Schema::create('utilities', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('username');
             $table->string('password');

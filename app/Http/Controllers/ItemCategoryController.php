@@ -20,7 +20,7 @@ class ItemCategoryController extends Controller
     {
         $categories = ItemCategory::where('isActive',1)->orderBy('name')->get();
         $deactivate = ItemCategory::where('isActive',0)->orderBy('name')->get();
-        return View('category.index',compact('categories','deactivate'));
+        return View('category',compact('categories','deactivate'));
     }
 
     /**

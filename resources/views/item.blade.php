@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12">
+    <div class="col-row">
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title"></h3>

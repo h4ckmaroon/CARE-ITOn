@@ -14,6 +14,7 @@ class CreateRequestDetailTable extends Migration
     public function up()
     {
         Schema::create('request_detail', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('requestId');
             $table->unsignedInteger('itemId');
             $table->string('photo');

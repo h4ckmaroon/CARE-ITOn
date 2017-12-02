@@ -14,6 +14,7 @@ class CreateCollectionHeaderTable extends Migration
     public function up()
     {
         Schema::create('collection_header', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('routeId');
             $table->timestamps();
