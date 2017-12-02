@@ -35,4 +35,5 @@ Route::group(['middleware'=>'auth'],function(){
         'index','store','edit','update','destroy']]);
     Route::patch('/admin/{$id}','AdminController@reactivate');
     Route::resource('/request','RequestController');
+    Route::resource('/collector','CollectorController');
 });
