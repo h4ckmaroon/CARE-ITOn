@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
             'username' => 'glopez',
             'password' => bcrypt('p@ssw0rd'),
             'userType' => 2,
-            'accountNo' => "",
+            'accountNo' => "123456789011",
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -64,6 +64,22 @@ class UserSeeder extends Seeder
             'username' => 'naerni',
             'password' => bcrypt('p@ssw0rd'),
             'userType' => 2,
+            'accountNo' => "123456789012",
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('users')->insert([
+            'username' => 'napereyra',
+            'password' => bcrypt('p@ssw0rd'),
+            'userType' => 3,
+            'accountNo' => "",
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('users')->insert([
+            'username' => 'zisorena',
+            'password' => bcrypt('p@ssw0rd'),
+            'userType' => 3,
             'accountNo' => "",
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

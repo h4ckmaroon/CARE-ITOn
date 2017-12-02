@@ -15,6 +15,11 @@ class CreateUtilitiesTable extends Migration
     {
         Schema::create('utilities', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('username');
+            $table->string('password');
+            $table->string('clientId');
+            $table->string('clientSecret');
+            $table->string('oauth');
             $table->timestamps();
         });
     }
