@@ -20,16 +20,14 @@ class Controller extends BaseController
     public function __construct() {
         $this->middleware(function ($request, $next) {
             $this->id = Auth::id();
-            $this->user = User::find($this->id);
-            $userType = $this->user->userType;
-            $wholeName = $this->user->detail->firstName.' '.$this->user->detail->lastName;;
-            $userName = $this->user->username;
-            $userPicture = $this->user->detail->photo;
-            View::share('user', $this->user);
-            View::share('userType', $this->user->userType);
-            View::share('wholeName', $wholeName);
-            View::share('userName', $userName);
-            View::share('userPicture', $userPicture);
+            if($this->id!=null){
+                $this->user = User::find($this->id);
+                View::share('userLog', $this->user);
+                View::share('userType', $this->user->userType);
+                View::share('wholeName', $this->user->detail->firstName.' '.$this->user->detail->lastName);
+                View::share('userName', $this->user->username);
+                View::share('userPicture', $this->user->detail->photo);
+            }
             return $next($request);
         });        
     }

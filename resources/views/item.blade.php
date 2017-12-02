@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!! Form::label('rate', 'Rate') !!}<span>*</span>
+                                            {!! Form::label('rate', 'Rate/kg') !!}<span>*</span>
                                             {!! Form::input('text','rate',null,[
                                                 'class' => 'form-control',
                                                 'placeholder'=>'Rate',
@@ -196,7 +196,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!! Form::label('rate', 'Rate') !!}<span>*</span>
+                                            {!! Form::label('rate', 'Rate/kg') !!}<span>*</span>
                                             {!! Form::input('text','rate',null,[
                                                 'id'=>'itemRate',
                                                 'class' => 'form-control',
