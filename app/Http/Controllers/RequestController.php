@@ -68,7 +68,7 @@ class RequestController extends Controller
                 DB::beginTransaction();
                 $requested = RequestHeader::create([
                     'userId' => $request->userId,
-                    'location' => "14.5437444,120.9599003",
+                    'location' => $request->loc,
                     'qrCode' => date("Ymdhis")
                 ]);
                 $items = $request->itemId;

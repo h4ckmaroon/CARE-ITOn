@@ -6,6 +6,7 @@ use App\User;
 use App\UserDetail;
 use App\Item;
 use App\ItemCategory;
+use App\RequestHeader;
 use Validator;
 use Redirect;
 use Session;
@@ -22,7 +23,8 @@ class DashboardController extends Controller
     public function index()
     {
         $items = Item::where('isActive',1)->orderBy('name')->get();
-        return View('dashboard',compact('items'));
+        $requests = RequestHeader::where('isActive', 1)->get();
+        return View('dashboard',compact('items','requests'));
     }
 
     /**

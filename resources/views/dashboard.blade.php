@@ -50,8 +50,6 @@
         </div>
         <div class="col-md-6">
           <div id="map">
-                
-       
           </div>
         </div>
 
@@ -82,6 +80,7 @@
         });
     </script>
     <script type="text/javascript">
+        var requests = {!!  ($requests) !!};
         var map;
         var marker;
         var gmarkers = [];
@@ -115,82 +114,72 @@
 
             var i = 0;
 
-            $.ajax({
-                type: 'GET',
-                url: 'https://maps.googleapis.com/maps/api/geocode/json?address=quezon city',
-                dataType: 'json',
-                success: function (data) {
+            for(var j = 0; j < requests.length; j++)
+            {
+                var latLng = requests[j].location.split(",");
                 var marker = new google.maps.Marker({
-                    position: { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng},
-                    map: map
+                position: {lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1])},
+                map: map
                 });
-
+                google.maps.event.addListener(marker, "click", function (e) {
+                var content = 'Latitude: ' + latLng[0] + '<br />Longitude: ' + latLng[1];
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: content
+                    });
+                infoWindow.open(map, marker);
                 gmarkers.push(marker);
-
-                },
-                error: function (data) {
-                    console.log(data);
-                }
             });
+            }
 
-            $.ajax({
-                type: 'GET',
-                url: 'https://maps.googleapis.com/maps/api/geocode/json?address=manila',
-                dataType: 'json',
-                success: function (data) {
-                var marker = new google.maps.Marker({
-                    position: { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng},
-                    map: map
-                });
+            
 
-                gmarkers.push(marker);
+            // $.ajax({
+            //     type: 'GET',
+            //     url: 'https://maps.googleapis.com/maps/api/geocode/json?address=manila',
+            //     dataType: 'json',
+            //     success: function (data) {
+            //     var marker = new google.maps.Marker({
+            //         position: { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng},
+            //         map: map
+            //     });
+
+            //     gmarkers.push(marker);
                 
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-            });
+            //     },
+            //     error: function (data) {
+            //         console.log(data);
+            //     }
+            // });
 
 
 
             // Listener for click on map
-            google.maps.event.addListener(map, 'click', 
-            function(event) {
+            // google.maps.event.addListener(map, 'click', 
+            // function(event) {
 
-                var location = event.latLng;
-                // Add marker
-                var marker = new google.maps.Marker({
-                position: location,
-                map: map
-                });
-                //Set unique id
-                marker.id = uniqueId;
-                uniqueId++;
-                google.maps.event.addListener(marker, "click", function (e) {
-                    var content = 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng();
-                    content += "<br /><input type = 'button' va;ue = 'Delete' onclick = 'DeleteMarker(" + marker.id + ");' value = 'Delete' />";
-                    var infoWindow = new google.maps.InfoWindow({
-                        content: content
-                    });
-                    infoWindow.open(map, marker);
-                });
+            //     var location = event.latLng;
+            //     // Add marker
+            //     var marker = new google.maps.Marker({
+            //     position: location,
+            //     map: map
+            //     });
+            //     //Set unique id
+            //     marker.id = uniqueId;
+            //     uniqueId++;
+            //     google.maps.event.addListener(marker, "click", function (e) {
+            //         var content = 'Latitude: ' + location.lat() + '<br />Longitude: ' + location.lng();
+            //         content += "<br /><input type = 'button' va;ue = 'Delete' onclick = 'DeleteMarker(" + marker.id + ");' value = 'Delete' />";
+            //         var infoWindow = new google.maps.InfoWindow({
+            //             content: content
+            //         });
+            //         infoWindow.open(map, marker);
+            //     });
  
-                gmarkers.push(marker);
+            //     gmarkers.push(marker);
 
-                console.log(gmarkers.length - 1);
-                // if (i == 0) request.origin = marker.getPosition();
-                // else if (i == gmarkers.length - 1) request.destination = marker.getPosition();
-                // else {
-                //   if (!request.waypoints) request.waypoints = [];
-                //   request.waypoints.push({
-                //     location: marker.getPosition(),
-                //     stopover: true
-                //   });
-                // }
-                // i++;
-                // console.log(marker.getPosition());
+            //     console.log(gmarkers.length - 1);
 
-            });
+            // });
 
         };
 
@@ -434,7 +423,7 @@
 
     </script>
 
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK-FOiYk3WPwzrZYbqQ8z6m2zW7Ytc2bk&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK-FOiYk3WPwzrZYbqQ8z6m2zW7Ytc2bk&callback=initMap"
     async defer></script>
 
     
