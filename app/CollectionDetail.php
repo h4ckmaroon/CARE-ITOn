@@ -8,6 +8,7 @@ class CollectionDetail extends Model
 {
     protected $table = 'collection_detail';
     public $incrementing = false;
+    public $timestamps = false;
     protected $fillable = [
     	'collectionId',
     	'itemId',

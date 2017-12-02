@@ -124,6 +124,11 @@
           <a href="{{url('/request')}}"><i class="fa fa-circle-o"></i> Request</a>
         </li>
         @endif
+        @if($userLog->userType!=1)
+        <li id="tCollection">
+          <a href="{{url('/collection')}}"><i class="fa fa-circle-o"></i> Collection</a>
+        </li>
+        @endif
       </ul>
     </section>
     <!-- /.sidebar -->
