@@ -17,7 +17,7 @@ class CreateRequestDetailTable extends Migration
             $table->engine = 'InnoDB';
             $table->unsignedInteger('requestId');
             $table->unsignedInteger('itemId');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('description',140)->nullable();
             $table->foreign('requestId')
                   ->references('id')->on('request_header')

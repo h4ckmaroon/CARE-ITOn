@@ -33,7 +33,7 @@ class RequestController extends Controller
      */
     public function create()
     {
-        $items = Item::where('isActive',1)->get();
+        $items = Item::where('isActive',1)->orderBy('name')->get();
         return View('request.create',compact('items'));
     }
 
@@ -45,7 +45,50 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'item.*' => 'required',
+            'description.*' => 'nullable|max:140',
+        ];
+        $messages = [
+            'unique' => ':attribute already exists.',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.'
+        ];
+        $niceNames = [
+            'item.*' => 'Item Category',
+            'description.*' => 'Description',
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        else{
+            try{
+                DB::beginTransaction();
+                $requested = RequestHeader::create([
+                    'userId' => $request->userId,
+                    'location' => "14.5437444,120.9599003",
+                    'qrCode' => date("Ymdhis")
+                ]);
+                $items = $request->itemId;
+                $descriptions = $request->description;
+                foreach ($items as $key => $item) {
+                    RequestDetail::create([
+                        'requestId' => $requested->id,
+                        'itemId' => $item,
+                        'description' => $descriptions[$key]
+                    ]);
+                }
+                DB::commit();
+            }catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
+            $request->session()->flash('success', 'Successfully added.');  
+            return Redirect('request');
+        }
     }
 
     /**

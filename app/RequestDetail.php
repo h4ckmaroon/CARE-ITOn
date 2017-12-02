@@ -8,6 +8,7 @@ class RequestDetail extends Model
 {
     protected $table = 'request_detail';
     public $incrementing = false;
+    public $timestamps = false;
     protected $fillable = [
         'requestId',
     	'itemId',
@@ -17,5 +18,9 @@ class RequestDetail extends Model
 
     public function header(){
     	return $this->belongsTo('App\RequestHeader', 'requestId');
+    }
+    
+    public function item(){
+    	return $this->belongsTo('App\Item', 'itemId');
     }
 }

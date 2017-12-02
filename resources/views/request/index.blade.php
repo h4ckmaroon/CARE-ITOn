@@ -28,25 +28,28 @@
                             <th></th>
                             <th>Date</th>
                             <th>Items</th>
-                            <th class="text-right">Action</th>
+                            <!-- <th class="text-right">Action</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($requests as $request)
                             <tr>
-                                <td></td>
-                                <td>{{$request->qrCode}}</td>
+                                <td>
+                                    <img width="100px" height="100px" src = "data:image/png;base64, {!! base64_encode(QrCode::format('png')->color(38, 38, 38, 0.85)->backgroundColor(255, 255, 255, 0.82)->size(200)->generate("$request->qrCode")) !!}">
+                                    {{$request->qrCode}} 
+                                </td>
                                 <td>{{$request->created_at}}</td>
+
                                 <td>
                                     @foreach($request->detail as $detail)
-                                        <li>{{$detail->item->name}}</li>
+                                        <li>{{$detail->item->name}} - {{$detail->description}}</li>
                                     @endforeach
                                 </td>
-                                <td class="text-right">
+                                <!-- <td class="text-right">
                                     <a href="{{url('/request/'.$request->id.'/edit')}}" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update record">
                                         <i class="glyphicon glyphicon-edit"></i>
                                     </a>
-                                </td>
+                                </td> -->
                             </tr>
                         @endforeach
                     </tbody>

@@ -104,6 +104,7 @@
                 <span>Dashboard</span>
             </a>
         </li>
+        @if($user->userType==1)
         <li class="header">MAINTENANCE</li>
         <li id="mCategory">
           <a href="{{url('/category')}}"><i class="fa fa-circle-o"></i> Item Category</a>
@@ -117,9 +118,12 @@
         <li id="mCollector">
           <a href="{{url('/collector')}}"><i class="fa fa-circle-o"></i> Manage Collectors</a>
         </li>
+        @endif
+        @if($user->userType==2)
         <li id="tRequest">
           <a href="{{url('/request')}}"><i class="fa fa-circle-o"></i> Request</a>
         </li>
+        @endif
       </ul>
     </section>
     <!-- /.sidebar -->
