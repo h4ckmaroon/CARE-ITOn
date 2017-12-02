@@ -110,7 +110,7 @@ class RegisterUserController extends Controller
                 return Redirect::back()->withErrors($errMess);
             }
             $request->session()->flash('success', 'Successfully added.');  
-            return Redirect('register-user');
+            return Redirect('login');
         }
     }
 

@@ -50,7 +50,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{asset('pics/careiton-small.png')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">{{$wholeName}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -58,8 +58,8 @@
                 <img src="{{asset('pics/careiton-big.png')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Paul Cruz - Administrator
-                  <small>Member since December. 2017</small>
+                  {{$wholeName}} - @if($userLog->userType==1){{"Administrator"}}@endif @if($userLog->userType==2){{"Customer"}}@endif @if($userLog->userType==3){{"Collector"}}@endif
+                  <small>Member since {{$userLog->created_at}}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -93,7 +93,7 @@
           <img src="{{asset('pics/careiton-small.png')}}" class="img-circle">
         </div>
         <div class="pull-left info">
-          <p>Paul Cruz</p>
+          <p>{{$wholeName}} - @if($userLog->userType==1){{"Administrator"}}@endif @if($userLog->userType==2){{"Customer"}}@endif @if($userLog->userType==3){{"Collector"}}@endif</p>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -104,7 +104,7 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        @if($user->userType==1)
+        @if($userLog->userType==1)
         <li class="header">MAINTENANCE</li>
         <li id="mCategory">
           <a href="{{url('/category')}}"><i class="fa fa-circle-o"></i> Item Category</a>
@@ -113,13 +113,13 @@
           <a href="{{url('/item')}}"><i class="fa fa-circle-o"></i> Item</a>
         </li>
         <li id="mAdmin">
-          <a href="{{url('/admin')}}"><i class="fa fa-circle-o"></i> Manage Administrators</a>
+          <a href="{{url('/admin')}}"><i class="fa fa-circle-o"></i> Manage @if($userLog->userType==1){{"Administrator"}}@endif @if($userLog->userType==2){{"Customer"}}@endif @if($userLog->userType==3){{"Collector"}}@endif</a>
         </li>
         <li id="mCollector">
           <a href="{{url('/collector')}}"><i class="fa fa-circle-o"></i> Manage Collectors</a>
         </li>
         @endif
-        @if($user->userType==2)
+        @if($userLog->userType==2)
         <li id="tRequest">
           <a href="{{url('/request')}}"><i class="fa fa-circle-o"></i> Request</a>
         </li>

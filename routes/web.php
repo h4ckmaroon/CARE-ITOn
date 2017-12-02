@@ -17,11 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('/register-user','RegisterUserController',['only' => [
-    'index','store']]);
 Route::resource('/payment','PaymentController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/register-user','RegisterUserController',['only' => [
+    'index','store']]);
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('/dashboard','DashboardController',['only' => [
         'index']]);

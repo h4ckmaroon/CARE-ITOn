@@ -32,7 +32,7 @@
                             <tr>
                                 <th>Item</th>
                                 <th>Category</th>
-                                <th>Rate (PhP)</th>
+                                <th>Rate/kg (PhP)</th>
                             </tr>
                         </thead>
                         <tbody>
