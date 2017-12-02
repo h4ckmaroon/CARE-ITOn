@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <br><br><br><br>
-                    <input type="hidden" name="userId" value="{{$user->id}}">
+                    <input type="hidden" name="userId" value="{{Auth::user()->id}}">
                     <table id="list" class="table table-striped table-bordered responsive">
                         <thead>
                             <tr>
