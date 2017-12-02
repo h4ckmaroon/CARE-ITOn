@@ -17,7 +17,7 @@ class CreateItemCategoryTable extends Migration
             $table->increments('id');
             $table->string('name',50);
             $table->string('description',140)->nullable();
-            $table->boolean('isActive');
+            $table->boolean('isActive')->default(1);
             $table->timestamps();
         });
     }

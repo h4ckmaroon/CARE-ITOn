@@ -8,6 +8,7 @@ class UserDetail extends Model
 {
     protected $table = 'user_detail';
     public $incrementing = false;
+    public $timestamps = false;
     protected $fillable = [
     	'userId',
         'firstName',

@@ -1,0 +1,11 @@
+body{
+    font-family: "Segoe UI"!important;
+}
+
+form span{
+    color: red;
+}
+
+form input, form textarea{
+    border-radius: 8px!important;
+}

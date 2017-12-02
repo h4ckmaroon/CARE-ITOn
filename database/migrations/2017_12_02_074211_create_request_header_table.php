@@ -18,8 +18,8 @@ class CreateRequestHeaderTable extends Migration
             $table->unsignedInteger('userId');
             $table->string('location');
             $table->string('qrCode');
-            $table->boolean('isActive');
-            $table->boolean('isCollected');
+            $table->boolean('isActive')->default(1);
+            $table->boolean('isCollected')->default(0);
             $table->timestamps();
             $table->foreign('userId')
                   ->references('id')->on('users')

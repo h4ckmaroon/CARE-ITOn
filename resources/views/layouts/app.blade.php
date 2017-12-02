@@ -8,17 +8,24 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>CARE-ITOn</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/skins/_all-skins.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.min.css') }}"  />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}" /> 
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/style.css') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" /> 
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
                         <span class="sr-only">Toggle Navigation</span>
@@ -29,7 +36,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        CARE-ITOn
                     </a>
                 </div>
 
@@ -44,7 +51,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ url('/register-user') }}">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -70,7 +77,6 @@
                 </div>
             </div>
         </nav>
-
         @yield('content')
     </div>
 

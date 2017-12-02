@@ -19,7 +19,7 @@ class CreateItemTable extends Migration
             $table->string('name',50);
             $table->string('description',140)->nullable();
             $table->double('rate',15,2);
-            $table->boolean('isActive');
+            $table->boolean('isActive')->default(1);
             $table->timestamps();
             $table->foreign('categoryId')
                   ->references('id')->on('item_category')

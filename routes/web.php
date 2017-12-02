@@ -17,4 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::resource('/register-user','RegisterUserController');
+Route::resource('/payment','PaymentController');
+
 Route::get('/home', 'HomeController@index')->name('home');

@@ -18,7 +18,7 @@ class CreateRouteTable extends Migration
             $table->unsignedInteger('requestId');
             $table->unsignedInteger('collectorId');
             $table->datetime('dateTime');
-            $table->boolean('isActive');
+            $table->boolean('isActive')->default(1);
             $table->timestamps();
             $table->foreign('requestId')
                   ->references('id')->on('request_header')
