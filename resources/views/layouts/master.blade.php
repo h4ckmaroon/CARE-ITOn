@@ -33,7 +33,7 @@ $main = 0;
 <div class="wrapper">
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{url('/dashboard')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>CRTN</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -110,6 +110,9 @@ $main = 0;
         <li class="header">MAINTENANCE</li>
         <li id="mCategory">
           <a href="{{url('/category')}}"><i class="fa fa-circle-o"></i> Item Category</a>
+        </li>
+        <li id="mItem">
+          <a href="{{url('/item')}}"><i class="fa fa-circle-o"></i> Item</a>
         </li>
       </ul>
     </section>
