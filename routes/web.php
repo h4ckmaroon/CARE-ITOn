@@ -21,7 +21,9 @@ Route::resource('/register-user','RegisterUserController',['only' => [
     'index','store']]);
 Route::resource('/payment','PaymentController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function(){
+    return redirect('/dashboard');
+})->name('home');
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('/dashboard','DashboardController',['only' => [
         'index']]);
