@@ -44,9 +44,6 @@ class AdminController extends Controller
     {
         $rules = [
             'username' => 'required|string|max:255',
-            'password' => 'required|min:6',
-            'cpassword' => 'required|min:6|same:password',
-            'accountNo' => 'required|max:12',
             'firstName' => ['required','max:50',Rule::unique('user_detail')->where('middleName',trim($request->middleName))->where('lastName',trim($request->lastName))],
             'middleName' => 'nullable|max:50',
             'lastName' => 'required|max:50',
@@ -62,14 +59,11 @@ class AdminController extends Controller
         ];
         $niceNames = [
             'username' => 'Username',
-            'password' => 'Password',
-            'cpassword' => 'Confirm Password',
             'firstName' => 'First Name',
             'middleName' => 'Middle Name',
             'lastName' => 'Last Name',
             'contactNo' => 'Contact No.',
             'email' => 'Email',
-            'accountNo' => 'Account No.',
             'photo' => 'User Picture'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);

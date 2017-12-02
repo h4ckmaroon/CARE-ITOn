@@ -19,8 +19,8 @@ class CollectorController extends Controller
      */
     public function index()
     {
-        $collectors = User::where('userType',1)->where('isActive',1)->get();
-        $deactivate = User::where('userType',1)->where('isActive',0)->get();
+        $collectors = User::where('userType',3)->where('isActive',1)->get();
+        $deactivate = User::where('userType',3)->where('isActive',0)->get();
         return View('collector',compact('collectors','deactivate'));
     }
 
@@ -104,7 +104,7 @@ class CollectorController extends Controller
                 return Redirect::back()->withErrors($errMess);
             }
             $request->session()->flash('success', 'Successfully added.');  
-            return Redirect('admin');
+            return Redirect('collector');
         }
     }
 
@@ -127,7 +127,8 @@ class CollectorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::with('detail')->findOrFail($id);
+        return response()->json(['user'=>$user]);
     }
 
     /**
@@ -139,7 +140,69 @@ class CollectorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'username' => 'required|string|max:255',
+            'firstName' => ['required','max:50',Rule::unique('user_detail')->where('middleName',trim($request->middleName))->where('lastName',trim($request->lastName))->ignore($id)],
+            'middleName' => 'nullable|max:50',
+            'lastName' => 'required|max:50',
+            'contactNo' => 'required|max:50',
+            'email' => 'required|email|max:75|unique:user_detail',
+            'photo' => 'image|mimes:jpeg,png,jpg,svg',
+        ];
+        $messages = [
+            'firstName.unique' => 'Name is already taken',
+            'required' => 'The :attribute field is required.',
+            'max' => 'The :attribute field must be no longer than :max characters.',
+            'regex' => 'The :attribute must not contain special characters.'                
+        ];
+        $niceNames = [
+            'username' => 'Username',
+            'firstName' => 'First Name',
+            'middleName' => 'Middle Name',
+            'lastName' => 'Last Name',
+            'contactNo' => 'Contact No.',
+            'email' => 'Email',
+            'photo' => 'User Picture'
+        ];
+        $validator = Validator::make($request->all(),$rules,$messages);
+        $validator->setAttributeNames($niceNames); 
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput($request->except('image'));
+        }
+        else{
+            try{
+                DB::beginTransaction();
+                $file = $request->file('photo');
+                $userPic = "";
+                if($file == '' || $file == null){
+                    $userPic = "pics/steve.jpg";
+                }else{
+                    $date = date("Ymdhis");
+                    $extension = $request->file('photo')->getClientOriginalExtension();
+                    $userPic = "pics/".$date.'.'.$extension;
+                    $request->file('photo')->move("pics",$userPic);    
+                }
+                $user = User::findOrFail($id);
+                $user->update([
+                    'username' => trim($request->username)
+                ]);
+                $detail = UserDetail::where('userId',$id)->first();
+                $detail->update([
+                    'firstName' => trim($request->firstName),
+                    'middleName' => trim($request->middleName),
+                    'lastName' => trim($request->lastName),
+                    'contactNo' => trim($request->contact),
+                    'email' => trim($request->email),
+                    'photo' => $userPic
+                ]);
+            }catch(\Illuminate\Database\QueryException $e){
+                DB::rollBack();
+                $errMess = $e->getMessage();
+                return Redirect::back()->withErrors($errMess);
+            }
+            $request->session()->flash('success', 'Successfully updated.');  
+            return Redirect('collector');
+        }
     }
 
     /**
@@ -148,8 +211,39 @@ class CollectorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $user = User::findOrFail($id);
+            $user->update([
+                'isActive' => 0
+            ]);
+            $request->session()->flash('success', 'Successfully deactivated.');  
+            DB::commit();
+        }catch(\Illuminate\Database\QueryException $e){
+            DB::rollBack();
+            $errMess = $e->getMessage();
+            return Redirect::back()->withErrors($errMess);
+        }
+        return Redirect('collector');
+    }
+
+    public function reactivate(Request $request,$id)
+    {
+        try{
+            DB::beginTransaction();
+            $user = User::findOrFail($id);
+            $user->update([
+                'isActive' => 1
+            ]);
+            DB::commit();
+        }catch(\Illuminate\Database\QueryException $e){
+            DB::rollBack();
+            $errMess = $e->getMessage();
+            return Redirect::back()->withErrors($errMess);
+        }
+        $request->session()->flash('success', 'Successfully reactivated.');  
+        return Redirect('collector');
     }
 }
