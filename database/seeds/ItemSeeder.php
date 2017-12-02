@@ -38,7 +38,7 @@ class ItemSeeder extends Seeder
         ]);
         DB::table('item')->insert([
             'categoryId' => 2,
-            'name' => 'Ketchup Bottle',
+            'name' => 'Catsup Bottle',
             'description' => '',
             'rate' => 5.00,
             'created_at' => Carbon::now(),
@@ -70,7 +70,7 @@ class ItemSeeder extends Seeder
         ]);
         DB::table('item')->insert([
             'categoryId' => 3,
-            'name' => '',
+            'name' => 'Galvanized Sheets',
             'description' => '',
             'rate' => 30.00,
             'created_at' => Carbon::now(),
@@ -97,6 +97,54 @@ class ItemSeeder extends Seeder
             'name' => 'Genuine',
             'description' => '',
             'rate' => 10.00,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('item')->insert([
+            'categoryId' => 1,
+            'name' => 'Newspaper',
+            'description' => '',
+            'rate' => 10.00,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('item')->insert([
+            'categoryId' => 1,
+            'name' => 'Magazines',
+            'description' => '',
+            'rate' => 5.00,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('item')->insert([
+            'categoryId' => 3,
+            'name' => 'Copper',
+            'description' => '',
+            'rate' => 50.00,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('item')->insert([
+            'categoryId' => 3,
+            'name' => 'Brass',
+            'description' => '',
+            'rate' => 30.00,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('item')->insert([
+            'categoryId' => 3,
+            'name' => 'Alloy',
+            'description' => '',
+            'rate' => 30.00,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('item')->insert([
+            'categoryId' => 3,
+            'name' => 'Scrap Metals',
+            'description' => '',
+            'rate' => 20.00,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
