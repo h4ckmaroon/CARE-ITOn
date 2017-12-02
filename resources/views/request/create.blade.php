@@ -17,25 +17,36 @@
 
         </div>
         <div class="col-md-6">
-            <div class="col-md-12">
-                {!! Form::label('itemId', 'Item') !!}
-                <select name="itemId" class="select2 form-control" id="itemId">
-                    @foreach($items as $item)
-                        <option value="{{$item->id}},{{$item->rate}}">{{$item->name}}</option>
-                    @endforeach
-                </select>
-                <button class="btn btn-primary">Add</button>
+            <div class="box">
+                <div class="box-header with-border">
+                    <div class="col-md-12">
+                        {!! Form::label('itemId', 'Item') !!}
+                        <div class="row">
+                            <div class="col-md-10">
+                                <select name="itemId" class="select2 form-control" id="itemId">
+                                    @foreach($items as $item)
+                                        <option value="{{$item->id}}" data-rate="{{ $item->rate }}" data-desc="{{ $item->desc }}" id="item{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" id="add">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br><br><br><br>
+                    <table id="list" class="table table-striped table-bordered responsive">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Description</th>
+                                <th>Rate</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
-            <table id="list" class="table table-striped table-bordered responsive">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Rate</th>
-                        <th>Description</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-            </table>
         </div>
     </div>
 @endsection
@@ -54,5 +65,35 @@
             });
             $('.select2').select2();
         })
+
+        $('#add').on('click', function(){
+
+            var rate = $('option:selected', '#itemId').attr('data-rate');
+            var desc = $('option:selected', '#itemId').attr('data-desc');
+            var name = $('option:selected', '#itemId').text();
+            var id = "#item" + $('#itemId').val();
+            var code = $('#itemId').val();
+
+
+            $('#list').DataTable().row.add([
+                name,
+                desc,
+                'Php ' + parseInt(rate).toFixed(2),
+                "<button class='btn btn-danger btnRemove' id='rem"+ code +"' value='"+ code +"'>Remove</button>"
+            ]).draw();
+
+            $(id).prop('disabled', true);
+            $('.select2').select2();
+        });
+
+        $('#list').on("click", "button", function(){
+            var val = $(this).val();
+
+            console.log($(this).parent());
+            $('#list').DataTable().row($(this).parents('tr')).remove().draw(false);
+
+            $("#item" + val).prop('disabled', false);
+            $('.select2').select2();
+        });
     </script>
 @endsection
