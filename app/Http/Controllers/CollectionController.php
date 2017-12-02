@@ -29,9 +29,9 @@ class CollectionController extends Controller
     {
         $id = Auth::id();
         $user = User::find($id);
+        $collections = [];
         if($user->userType==2){
             $collections = CollectionHeader::get();
-            return $collections;
         }
         return View('collection.index',compact('collections'));
     }
