@@ -17,9 +17,14 @@ class CreateCollectionHeaderTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('requestId');
+            $table->unsignedInteger('collectorId');
             $table->timestamps();
             $table->foreign('requestId')
                   ->references('id')->on('request_header')
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
+            $table->foreign('collectorId')
+                  ->references('id')->on('users')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
         });

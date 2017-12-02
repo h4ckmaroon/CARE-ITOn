@@ -19,9 +19,13 @@ Auth::routes();
 
 Route::resource('/payment','PaymentController');
 
-// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home', function(){
+    return redirect('/dashboard');
+})->name('home');
 Route::resource('/register-user','RegisterUserController',['only' => [
     'index','store']]);
+
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('/dashboard','DashboardController',['only' => [
         'index']]);
@@ -39,4 +43,5 @@ Route::group(['middleware'=>'auth'],function(){
         'index','store','edit','update','destroy']]);
     Route::patch('/collector/{$id}','CollectorController@reactivate');   
     Route::resource('/request','RequestController');
+    Route::resource('/collection','CollectionController');
 });
