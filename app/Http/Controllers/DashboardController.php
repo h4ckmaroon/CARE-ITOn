@@ -1,8 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\User;
+use App\UserDetail;
+use App\Item;
+use App\ItemCategory;
+use Validator;
+use Redirect;
+use Session;
+use DB;
+use Illuminate\Validation\Rule;
 
 class DashboardController extends Controller
 {
@@ -13,7 +21,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::where('isActive',1)->orderBy('name')->get();
+        return View('dashboard',compact('items'));
     }
 
     /**

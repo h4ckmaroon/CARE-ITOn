@@ -1,0 +1,56 @@
+body{
+    font-family: 'Segoe UI'
+}
+form span{
+    font-weight: 580;
+    color: red;
+}
+form input{
+    font-weight: 580;
+}
+form select{
+    font-weight: 580;
+}
+form textarea{
+    font-weight: 580;
+}
+label{
+    font-weight: 600;
+}
+.no-border-input{
+    border: none!important;
+    background: transparent!important
+}
+.panel-heading {
+    cursor: pointer;
+}
+.select2-container{
+    width: 100%!important;
+}
+span.pro{
+    color: black!important;
+}
+@media (min-width: 992px){
+    .dataTables_filter{
+        float:left;
+    }
+    .dataTables_length{
+        float:right;
+    }
+}
+
+fieldset { 
+    display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 2px groove !important;
+}
+
+table{
+    width: 100%;
+}
+

@@ -70,7 +70,7 @@ class ItemSeeder extends Seeder
         ]);
         DB::table('item')->insert([
             'categoryId' => 3,
-            'name' => '',
+            'name' => 'Steel',
             'description' => '',
             'rate' => 30.00,
             'created_at' => Carbon::now(),

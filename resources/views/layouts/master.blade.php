@@ -11,13 +11,15 @@ $main = 0;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/AdminLTE.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/skins/_all-skins.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.min.css') }}"  />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}" /> 
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/style.css') }}">
+    @yield('style')
+    <link rel="stylesheet" href="{{ URL::asset('assets/jquery/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/bootstrap/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/bootstrap/css/ionicons.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/iCheck/all.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/dist/css/skins/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/custom.css') }}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" /> 
     <title>CARE-ITOn | @yield('title')</title>
     <script>
@@ -50,42 +52,32 @@ $main = 0;
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="{{asset('pics/careiton-small.png')}}" class="user-image" alt="User Image">
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="{{asset('pics/careiton-big.png')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  Paul Cruz - Administrator
+                  <small>Member since December. 2017</small>
                 </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
+                  <div class="pull-right">
+                  <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                                  document.getElementById('logout-form').submit();">
+                      Sign out
+                  </a>
+
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                  </form>
+                  </div>
               </li>
             </ul>
           </li>
@@ -101,7 +93,7 @@ $main = 0;
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="{{asset('pics/careiton-small.png')}}" class="img-circle">
         </div>
         <div class="pull-left info">
           <p>Paul Cruz</p>
@@ -109,18 +101,15 @@ $main = 0;
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview menu-open">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
+        <li id="dashboard">
+            <a href="{{url('/dashboard')}}">
+                <i class="fa fa-line-chart"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="header">MAINTENANCE</li>
+        <li id="mCategory">
+          <a href="{{url('/category')}}"><i class="fa fa-circle-o"></i> Item Category</a>
         </li>
       </ul>
     </section>
@@ -136,7 +125,9 @@ $main = 0;
     <section class="content">
       @include('layouts.notif')
       <div class="row">
-        @yield('content')
+        <div class="col-md-12">
+          @yield('content')
+        </div>
       </div>
     </section>
     <!-- /.content -->
@@ -150,13 +141,50 @@ $main = 0;
        immediately after the control sidebar -->
 </div>
     
-<script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/jquery-ui.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/adminlte.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/datatables.min.js') }}" type="text/javascript"></script>
-
-@yield('js')
+<script src="{{ URL::asset('assets/jquery/jquery.min.js') }}"></script>
+<script src="{{ URL::asset('assets/jquery/jquery-ui.min.js') }}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{{ URL::asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<!-- SlimScroll -->
+<script src="{{ URL::asset('assets/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
+<script src="{{ URL::asset('assets/plugins/iCheck/icheck.min.js')}}"></script>
+<!-- FastClick -->
+<script src="{{ URL::asset('assets/plugins/fastclick/fastclick.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{ URL::asset('assets/dist/js/app.min.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ URL::asset('assets/dist/js/demo.js')}}"></script>
+<script src="{{ URL::asset('assets/plugins/daterangepicker/moment.min.js') }}"></script>
+<script>
+  $(function () {
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+            radioClass: 'iradio_minimal-blue'
+        });
+        //Red color scheme for iCheck
+        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+            checkboxClass: 'icheckbox_minimal-red',
+            radioClass: 'iradio_minimal-red'
+        });
+        //Flat blue color scheme for iCheck
+        $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        });
+        //Square blue color scheme for icheck
+        $('input[type="checkbox"].square-blue, input[type="radio"].square-blue').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue'
+        });
+    });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+@yield('scripts')
 
 </body>
 
