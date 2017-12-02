@@ -8,7 +8,7 @@ class CollectionHeader extends Model
 {
     protected $table = 'collection_header';
     protected $fillable = [
-    	'routeId'
+    	'requestId'
     ];
 
     public function route(){

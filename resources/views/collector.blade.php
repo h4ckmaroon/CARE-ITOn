@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    {{"Administrator"}}
+    {{"Collectoristrator"}}
 @stop
 
 @section('style')
@@ -23,7 +23,7 @@
             </div>
             <div class="box-body dataTable_wrapper">
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="activeTableAdmin">
+                    <div role="tabpanel" class="tab-pane active" id="activeTableCollector">
                         <table id="list" class="table table-striped table-bordered responsive">
                             <thead>
                                 <tr>
@@ -34,23 +34,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($admins as $admin)
+                                @foreach($collectors as $collector)
                                     <tr>
                                         <td></td>
-                                        <td>{{$admin->username}}</td>
+                                        <td>{{$collector->username}}</td>
                                         <td>
-                                            <li>Name: {{$admin->detail->firstName}} {{$admin->detail->middleName}} {{$admin->detail->lastName}}</li>
-                                            <li>Contact: {{$admin->detail->contactNo}}</li>
-                                            <li>Email: {{$admin->detail->email}}</li>
+                                            <li>Name: {{$collector->detail->firstName}} {{$collector->detail->middleName}} {{$collector->detail->lastName}}</li>
+                                            <li>Contact: {{$collector->detail->contactNo}}</li>
+                                            <li>Email: {{$collector->detail->email}}</li>
                                         </td>
                                         <td class="text-right">
-                                            <button onclick="updateModal({{$admin->id}})" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update record">
+                                            <button onclick="updateModal({{$collector->id}})" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Update record">
                                                 <i class="glyphicon glyphicon-edit"></i>
                                             </button>
-                                            <button onclick="deactivateShow({{$admin->id}})" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
+                                            <button onclick="deactivateShow({{$collector->id}})" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate record">
                                                 <i class="glyphicon glyphicon-trash"></i>
                                             </button>
-                                            {!! Form::open(['method'=>'delete','action' => ['AdminController@destroy',$admin->id],'id'=>'del'.$admin->id]) !!}
+                                            {!! Form::open(['method'=>'delete','action' => ['CollectorController@destroy',$collector->id],'id'=>'del'.$collector->id]) !!}
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>
@@ -58,7 +58,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="inactiveTableAdmin">
+                    <div role="tabpanel" class="tab-pane" id="inactiveTableCollector">
                         <table id="dlist" class="table table-striped table-bordered responsive">
                             <thead>
                                 <tr>
@@ -69,20 +69,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($deactivate as $admin)
+                                @foreach($deactivate as $collector)
                                     <tr>
                                         <td></td>
-                                        <td>{{$admin->username}}</td>
+                                        <td>{{$collector->username}}</td>
                                         <td>
-                                            <li>Name: {{$admin->detail->firstName}} {{$admin->detail->middleName}} {{$admin->detail->lastName}}</li>
-                                            <li>Contact: {{$admin->detail->contactNo}}</li>
-                                            <li>Email: {{$admin->detail->email}}</li>
+                                            <li>Name: {{$collector->detail->firstName}} {{$collector->detail->middleName}} {{$collector->detail->lastName}}</li>
+                                            <li>Contact: {{$collector->detail->contactNo}}</li>
+                                            <li>Email: {{$collector->detail->email}}</li>
                                         </td>
                                         <td class="text-right">
-                                            <button onclick="reactivateShow({{$admin->id}})"type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Reactivate record">
+                                            <button onclick="reactivateShow({{$collector->id}})"type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Reactivate record">
                                                 <i class="glyphicon glyphicon-refresh"></i>
                                             </button>
-                                            {!! Form::open(['method'=>'patch','action' => ['AdminController@reactivate',$admin->id],'id'=>'reactivate'.$admin->id]) !!}
+                                            {!! Form::open(['method'=>'patch','action' => ['CollectorController@reactivate',$collector->id],'id'=>'reactivate'.$collector->id]) !!}
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>
@@ -97,7 +97,7 @@
                 {{-- Create --}}
                 <div id="createModal" class="modal fade">
                     <div class="modal-dialog">
-                    {!! Form::open(['url' => 'admin']) !!}
+                    {!! Form::open(['url' => 'collector']) !!}
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -107,21 +107,6 @@
                             <div class="modal-body">
                                 <div class="row">
                                     @include('layouts.required')
-                                    <div class="col-md-4 col-md-offset-4">
-                                        <center>
-                                            <img class="img-responsive" id="tech-pic" src="" style="max-width:150px; background-size: contain" />
-                                        </center>
-                                        <center>
-                                            {!! Form::label('pic', 'User Picture') !!}
-                                            {!! Form::file('photo',[
-                                                'class' => 'form-control',
-                                                'name' => 'photo',
-                                                'class' => 'btn btn-success btn-sm',
-                                                'onchange' => 'readURL(this)']) 
-                                            !!}
-                                        </center>
-                                    </div>
-                                    <div class="col-md-12"></div>
                                     <div class="col-md-4 col-md-offset-4">
                                         <div class="form-group">
                                             {!! Form::label('username', 'Username') !!}<span>*</span>
@@ -202,7 +187,7 @@
                 {{-- Update --}}
                 <div id="updateModal" class="modal fade">
                     <div class="modal-dialog">
-                    {!! Form::open(['method'=>'patch','action' => ['AdminController@update',0]]) !!}
+                    {!! Form::open(['method'=>'patch','action' => ['CollectorController@update',0]]) !!}
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -213,21 +198,6 @@
                                 <div class="row">
                                     @include('layouts.required')
                                     <input id="userId" name="id" type="hidden">
-                                    <div class="col-md-4 col-md-offset-4">
-                                        <center>
-                                            <img class="img-responsive" id="tech-pic" src="" style="max-width:150px; background-size: contain" />
-                                        </center>
-                                        <center>
-                                            {!! Form::label('pic', 'User Picture') !!}
-                                            {!! Form::file('photo',[
-                                                'class' => 'form-control',
-                                                'name' => 'photo',
-                                                'class' => 'btn btn-success btn-sm',
-                                                'onchange' => 'readURL(this)']) 
-                                            !!}
-                                        </center>
-                                    </div>
-                                    <div class="col-md-12"></div>
                                     <div class="col-md-4 col-md-offset-4">
                                         <div class="form-group">
                                             {!! Form::label('username', 'Username') !!}<span>*</span>
@@ -327,12 +297,12 @@
             $('#dlist').DataTable({
                 responsive: true,
             });
-            $('#mAdmin').addClass('active');
+            $('#mCollector').addClass('active');
         });
         function updateModal(id){
             $.ajax({
 				type: "GET",
-				url: "/admin/"+id+"/edit",
+				url: "/collector/"+id+"/edit",
 				dataType: "JSON",
 				success:function(data){
                     $("#userId").val(data.user.id);
@@ -345,17 +315,6 @@
 				}
 			});
             $('#updateModal').modal('show');
-        }
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#tech-pic')
-                        .attr('src', e.target.result)
-                        .width(180);
-                    };
-                reader.readAsDataURL(input.files[0]);
-            }
         }
     </script>
 @stop

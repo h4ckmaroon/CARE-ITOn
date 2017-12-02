@@ -16,10 +16,10 @@ class CreateCollectionHeaderTable extends Migration
         Schema::create('collection_header', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->unsignedInteger('routeId');
+            $table->unsignedInteger('requestId');
             $table->timestamps();
-            $table->foreign('routeId')
-                  ->references('id')->on('route')
+            $table->foreign('requestId')
+                  ->references('id')->on('request_header')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
         });

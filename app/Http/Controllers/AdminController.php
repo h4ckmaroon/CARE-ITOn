@@ -44,11 +44,15 @@ class AdminController extends Controller
     {
         $rules = [
             'username' => 'required|string|max:255',
+            'password' => 'required|min:6',
+            'cpassword' => 'required|min:6|same:password',
+            'accountNo' => 'required|max:12',
             'firstName' => ['required','max:50',Rule::unique('user_detail')->where('middleName',trim($request->middleName))->where('lastName',trim($request->lastName))],
             'middleName' => 'nullable|max:50',
             'lastName' => 'required|max:50',
             'contactNo' => 'required|max:50',
             'email' => 'required|email|max:75|unique:user_detail',
+            'photo' => 'image|mimes:jpeg,png,jpg,svg',
         ];
         $messages = [
             'firstName.unique' => 'Name is already taken',
@@ -58,20 +62,34 @@ class AdminController extends Controller
         ];
         $niceNames = [
             'username' => 'Username',
+            'password' => 'Password',
+            'cpassword' => 'Confirm Password',
             'firstName' => 'First Name',
             'middleName' => 'Middle Name',
             'lastName' => 'Last Name',
             'contactNo' => 'Contact No.',
             'email' => 'Email',
+            'accountNo' => 'Account No.',
+            'photo' => 'User Picture'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->withInput($request->except('image'));
+            return Redirect::back()->withErrors($validator)->withInput($request->except('photo'));
         }
         else{
             try{
                 DB::beginTransaction();
+                $file = $request->file('photo');
+                $userPic = "";
+                if($file == '' || $file == null){
+                    $userPic = "pics/steve.jpg";
+                }else{
+                    $date = date("Ymdhis");
+                    $extension = $request->file('photo')->getClientOriginalExtension();
+                    $userPic = "pics/".$date.'.'.$extension;
+                    $request->file('photo')->move("pics",$userPic);    
+                }
                 $user = User::create([
                     'username' => trim($request->username),
                     'password' => bcrypt(trim('p@ssw0rd')),
@@ -83,7 +101,8 @@ class AdminController extends Controller
                     'middleName' => trim($request->middleName),
                     'lastName' => trim($request->lastName),
                     'contactNo' => trim($request->contact),
-                    'email' => trim($request->email)
+                    'email' => trim($request->email),
+                    'photo' => $userPic
                 ]);
             }catch(\Illuminate\Database\QueryException $e){
                 DB::rollBack();
@@ -134,6 +153,7 @@ class AdminController extends Controller
             'lastName' => 'required|max:50',
             'contactNo' => 'required|max:50',
             'email' => 'required|email|max:75|unique:user_detail',
+            'photo' => 'image|mimes:jpeg,png,jpg,svg',
         ];
         $messages = [
             'firstName.unique' => 'Name is already taken',
@@ -148,6 +168,7 @@ class AdminController extends Controller
             'lastName' => 'Last Name',
             'contactNo' => 'Contact No.',
             'email' => 'Email',
+            'photo' => 'User Picture'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
@@ -157,6 +178,16 @@ class AdminController extends Controller
         else{
             try{
                 DB::beginTransaction();
+                $file = $request->file('photo');
+                $userPic = "";
+                if($file == '' || $file == null){
+                    $userPic = "pics/steve.jpg";
+                }else{
+                    $date = date("Ymdhis");
+                    $extension = $request->file('photo')->getClientOriginalExtension();
+                    $userPic = "pics/".$date.'.'.$extension;
+                    $request->file('photo')->move("pics",$userPic);    
+                }
                 $user = User::findOrFail($id);
                 $user->update([
                     'username' => trim($request->username)
@@ -167,7 +198,8 @@ class AdminController extends Controller
                     'middleName' => trim($request->middleName),
                     'lastName' => trim($request->lastName),
                     'contactNo' => trim($request->contact),
-                    'email' => trim($request->email)
+                    'email' => trim($request->email),
+                    'photo' => $userPic
                 ]);
             }catch(\Illuminate\Database\QueryException $e){
                 DB::rollBack();

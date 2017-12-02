@@ -31,6 +31,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::resource('/item','ItemController',['only' => [
         'index','store','edit','update','destroy']]);
     Route::patch('/item/{$id}','ItemController@reactivate');
-    Route::resource('/admin','AdminController');
+    Route::resource('/admin','AdminController',['only' => [
+        'index','store','edit','update','destroy']]);
     Route::patch('/admin/{$id}','AdminController@reactivate');
+    Route::resource('/request','RequestController');
 });

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\User;
 use App\UserDetail;
@@ -9,9 +10,7 @@ use Redirect;
 use Session;
 use DB;
 use Illuminate\Validation\Rule;
-
-
-class RegisterUserController extends Controller
+class CollectorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +19,9 @@ class RegisterUserController extends Controller
      */
     public function index()
     {
-        return View('Auth.register');
+        $collectors = User::where('userType',1)->where('isActive',1)->get();
+        $deactivate = User::where('userType',1)->where('isActive',0)->get();
+        return View('collector',compact('collectors','deactivate'));
     }
 
     /**
@@ -43,10 +44,7 @@ class RegisterUserController extends Controller
     {
         $rules = [
             'username' => 'required|string|max:255',
-            'password' => 'required|min:6',
-            'cpassword' => 'required|min:6|same:password',
-            'accountNo' => 'required|max:12',
-            'firstName' => ['required','max:50',Rule::unique('user_detail')->where('middleName',trim($request->middleName))->where('lastName',trim($request->lastName))],
+            'firstName' => ['required','max:50',Rule::unique('user_detail')->where('middleName',trim($request->middleName))->where('lastName',trim($request->lastName))->ignore($id)],
             'middleName' => 'nullable|max:50',
             'lastName' => 'required|max:50',
             'contactNo' => 'required|max:50',
@@ -61,24 +59,21 @@ class RegisterUserController extends Controller
         ];
         $niceNames = [
             'username' => 'Username',
-            'password' => 'Password',
-            'cpassword' => 'Confirm Password',
             'firstName' => 'First Name',
             'middleName' => 'Middle Name',
             'lastName' => 'Last Name',
             'contactNo' => 'Contact No.',
             'email' => 'Email',
-            'accountNo' => 'Account No.',
             'photo' => 'User Picture'
         ];
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->withInput($request->except('photo'));
+            return Redirect::back()->withErrors($validator)->withInput($request->except('image'));
         }
         else{
             try{
-                // DB::beginTransaction();
+                DB::beginTransaction();
                 $file = $request->file('photo');
                 $userPic = "";
                 if($file == '' || $file == null){
@@ -91,9 +86,8 @@ class RegisterUserController extends Controller
                 }
                 $user = User::create([
                     'username' => trim($request->username),
-                    'password' => bcrypt(trim($request->password)),
-                    'userType' => 2,
-                    'accountNo' => trim($request->accountNo)
+                    'password' => bcrypt(trim('p@ssw0rd')),
+                    'userType' => 1
                 ]);
                 UserDetail::create([
                     'userId' => $user->id,
@@ -110,7 +104,7 @@ class RegisterUserController extends Controller
                 return Redirect::back()->withErrors($errMess);
             }
             $request->session()->flash('success', 'Successfully added.');  
-            return Redirect('register-user');
+            return Redirect('admin');
         }
     }
 

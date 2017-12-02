@@ -15,7 +15,8 @@ class UserDetail extends Model
         'middleName',
         'lastName',
         'contactNo',
-        'email'
+        'email',
+        'photo'
     ];
 
     public function user(){

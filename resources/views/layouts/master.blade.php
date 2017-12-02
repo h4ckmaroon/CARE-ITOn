@@ -23,21 +23,25 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
 <div class="wrapper">
+
   <header class="main-header">
     <!-- Logo -->
-    <a href="{{url('/dashboard')}}" class="logo">
+    <a href="" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>CRTN</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>CARE-ITOn</b></span>
     </a>
-
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
@@ -106,6 +110,15 @@
         </li>
         <li id="mItem">
           <a href="{{url('/item')}}"><i class="fa fa-circle-o"></i> Item</a>
+        </li>
+        <li id="mAdmin">
+          <a href="{{url('/admin')}}"><i class="fa fa-circle-o"></i> Manage Administrators</a>
+        </li>
+        <li id="mCollector">
+          <a href="{{url('/collector')}}"><i class="fa fa-circle-o"></i> Manage Collectors</a>
+        </li>
+        <li id="tRequest">
+          <a href="{{url('/request')}}"><i class="fa fa-circle-o"></i> Request</a>
         </li>
       </ul>
     </section>

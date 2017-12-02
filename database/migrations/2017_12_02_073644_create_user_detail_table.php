@@ -21,6 +21,7 @@ class CreateUserDetailTable extends Migration
             $table->string('lastName',50);
             $table->string('contactNo',50);
             $table->string('email')->unique();
+            $table->string('photo')->nullable();
             $table->foreign('userId')
                   ->references('id')->on('users')
                   ->onUpdate('cascade')

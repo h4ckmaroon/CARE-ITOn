@@ -10,6 +10,21 @@
                 <div class="panel-body">
                     {!! Form::open(['url' => 'register-user']) !!}
                         <div class="row">
+                            <div class="col-md-4 col-md-offset-4">
+                                <center>
+                                    <img class="img-responsive" id="tech-pic" src="" style="max-width:150px; background-size: contain" />
+                                </center>
+                                <center>
+                                    {!! Form::label('pic', 'User Picture') !!}
+                                    {!! Form::file('photo',[
+                                        'class' => 'form-control',
+                                        'name' => 'photo',
+                                        'class' => 'btn btn-success btn-sm',
+                                        'onchange' => 'readURL(this)']) 
+                                    !!}
+                                </center>
+                            </div>
+                            <div class="col-md-12"></div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('username', 'Username') !!}<span>*</span>
@@ -126,6 +141,16 @@
         $('#contactNo').inputmask("(9999) 999-9999");
         $('#accountNo').inputmask("999999999999");
     });
-        
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#tech-pic')
+                    .attr('src', e.target.result)
+                    .width(180);
+                };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 @endsection
