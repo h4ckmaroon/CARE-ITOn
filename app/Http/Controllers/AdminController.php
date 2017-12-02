@@ -49,7 +49,6 @@ class AdminController extends Controller
             'lastName' => 'required|max:50',
             'contactNo' => 'required|max:50',
             'email' => 'required|email|max:75|unique:user_detail',
-            'photo' => 'image|mimes:jpeg,png,jpg,svg',
         ];
         $messages = [
             'firstName.unique' => 'Name is already taken',
@@ -98,6 +97,7 @@ class AdminController extends Controller
                     'email' => trim($request->email),
                     'photo' => $userPic
                 ]);
+                DB::commit();
             }catch(\Illuminate\Database\QueryException $e){
                 DB::rollBack();
                 $errMess = $e->getMessage();
@@ -142,12 +142,11 @@ class AdminController extends Controller
     {
         $rules = [
             'username' => 'required|string|max:255',
-            'firstName' => ['required','max:50',Rule::unique('user_detail')->where('middleName',trim($request->middleName))->where('lastName',trim($request->lastName))->ignore($id)],
+            'firstName' => ['required','max:50',Rule::unique('user_detail')->where('middleName',trim($request->middleName))->where('lastName',trim($request->lastName))->ignore($request->id,'userId')],
             'middleName' => 'nullable|max:50',
             'lastName' => 'required|max:50',
             'contactNo' => 'required|max:50',
-            'email' => 'required|email|max:75|unique:user_detail',
-            'photo' => 'image|mimes:jpeg,png,jpg,svg',
+            'email' => ['required','email','max:75',Rule::unique('user_detail')->ignore($request->id,'userId')],
         ];
         $messages = [
             'firstName.unique' => 'Name is already taken',
@@ -167,7 +166,7 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(),$rules,$messages);
         $validator->setAttributeNames($niceNames); 
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->withInput($request->except('image'));
+            return Redirect::back()->withErrors($validator)->withInput($request->except('photo'));
         }
         else{
             try{
@@ -182,19 +181,20 @@ class AdminController extends Controller
                     $userPic = "pics/".$date.'.'.$extension;
                     $request->file('photo')->move("pics",$userPic);    
                 }
-                $user = User::findOrFail($id);
+                $user = User::findOrFail($request->id);
                 $user->update([
                     'username' => trim($request->username)
                 ]);
-                $detail = UserDetail::where('userId',$id)->first();
+                $detail = UserDetail::where('userId',$request->id)->first();
                 $detail->update([
                     'firstName' => trim($request->firstName),
                     'middleName' => trim($request->middleName),
                     'lastName' => trim($request->lastName),
-                    'contactNo' => trim($request->contact),
+                    'contactNo' => trim($request->contactNo),
                     'email' => trim($request->email),
                     'photo' => $userPic
                 ]);
+                DB::commit();
             }catch(\Illuminate\Database\QueryException $e){
                 DB::rollBack();
                 $errMess = $e->getMessage();

@@ -36,7 +36,9 @@
                             <tbody>
                                 @foreach($admins as $admin)
                                     <tr>
-                                        <td></td>
+                                        <td>
+                                            <img class="img-responsive" src="{{URL::asset($admin->detail->photo)}}" alt="" style="max-width:150px; background-size: contain">
+                                        </td>
                                         <td>{{$admin->username}}</td>
                                         <td>
                                             <li>Name: {{$admin->detail->firstName}} {{$admin->detail->middleName}} {{$admin->detail->lastName}}</li>
@@ -71,7 +73,9 @@
                             <tbody>
                                 @foreach($deactivate as $admin)
                                     <tr>
-                                        <td></td>
+                                        <td>
+                                            <img class="img-responsive" src="{{URL::asset($admin->detail->photo)}}" alt="" style="max-width:150px; background-size: contain">
+                                        </td>
                                         <td>{{$admin->username}}</td>
                                         <td>
                                             <li>Name: {{$admin->detail->firstName}} {{$admin->detail->middleName}} {{$admin->detail->lastName}}</li>

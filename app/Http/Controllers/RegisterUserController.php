@@ -51,7 +51,6 @@ class RegisterUserController extends Controller
             'lastName' => 'required|max:50',
             'contactNo' => 'required|max:50',
             'email' => 'required|email|max:75|unique:user_detail',
-            'photo' => 'image|mimes:jpeg,png,jpg,svg',
         ];
         $messages = [
             'firstName.unique' => 'Name is already taken',
@@ -78,7 +77,7 @@ class RegisterUserController extends Controller
         }
         else{
             try{
-                // DB::beginTransaction();
+                DB::beginTransaction();
                 $file = $request->file('photo');
                 $userPic = "";
                 if($file == '' || $file == null){
@@ -104,6 +103,7 @@ class RegisterUserController extends Controller
                     'email' => trim($request->email),
                     'photo' => $userPic
                 ]);
+                DB::commit();
             }catch(\Illuminate\Database\QueryException $e){
                 DB::rollBack();
                 $errMess = $e->getMessage();

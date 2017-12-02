@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    {{"Collectoristrator"}}
+    {{"Collector"}}
 @stop
 
 @section('style')
@@ -36,7 +36,9 @@
                             <tbody>
                                 @foreach($collectors as $collector)
                                     <tr>
-                                        <td></td>
+                                        <td>
+                                            <img class="img-responsive" src="{{URL::asset($collector->detail->photo)}}" alt="" style="max-width:150px; background-size: contain">
+                                        </td>
                                         <td>{{$collector->username}}</td>
                                         <td>
                                             <li>Name: {{$collector->detail->firstName}} {{$collector->detail->middleName}} {{$collector->detail->lastName}}</li>
@@ -71,7 +73,9 @@
                             <tbody>
                                 @foreach($deactivate as $collector)
                                     <tr>
-                                        <td></td>
+                                        <td>
+                                            <img class="img-responsive" src="{{URL::asset($collector->detail->photo)}}" alt="" style="max-width:150px; background-size: contain">
+                                        </td>
                                         <td>{{$collector->username}}</td>
                                         <td>
                                             <li>Name: {{$collector->detail->firstName}} {{$collector->detail->middleName}} {{$collector->detail->lastName}}</li>

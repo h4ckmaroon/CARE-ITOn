@@ -17,7 +17,8 @@ class UserDetailSeeder extends Seeder
             'middleName' => 'Barrameda',
             'lastName' => 'Coronado',
             'contactNo' => '09195436694',
-            'email' => 'hongkaira@gmail.com'
+            'email' => 'hongkaira@gmail.com',
+            'photo' => 'pics/steve.jpg'
         ]);
         DB::table('user_detail')->insert([
             'userId' => 2,
@@ -25,7 +26,8 @@ class UserDetailSeeder extends Seeder
             'middleName' => 'Virrey',
             'lastName' => 'Vivas',
             'contactNo' => '09054090523',
-            'email' => 'cvivas@indra.es'
+            'email' => 'cvivas@indra.es',
+            'photo' => 'pics/steve.jpg'
         ]);
         DB::table('user_detail')->insert([
             'userId' => 3,
@@ -33,7 +35,8 @@ class UserDetailSeeder extends Seeder
             'middleName' => 'Reyes',
             'lastName' => 'Uy',
             'contactNo' => '09984123460',
-            'email' => 'mjuy@pup.edu.ph'
+            'email' => 'mjuy@pup.edu.ph',
+            'photo' => 'pics/steve.jpg'
         ]);
         DB::table('user_detail')->insert([
             'userId' => 4,
@@ -41,7 +44,8 @@ class UserDetailSeeder extends Seeder
             'middleName' => 'Navarro',
             'lastName' => 'Cruz',
             'contactNo' => '09054090523',
-            'email' => 'pacruz@indra.es'
+            'email' => 'pacruz@indra.es',
+            'photo' => 'pics/steve.jpg'
         ]);
         DB::table('user_detail')->insert([
             'userId' => 5,
@@ -49,7 +53,8 @@ class UserDetailSeeder extends Seeder
             'middleName' => 'Rodriguez',
             'lastName' => 'Romasanta',
             'contactNo' => '09991231263',
-            'email' => 'jromasanta@indra.es'
+            'email' => 'jromasanta@indra.es',
+            'photo' => 'pics/steve.jpg'
         ]);
         DB::table('user_detail')->insert([
             'userId' => 6,
@@ -57,7 +62,8 @@ class UserDetailSeeder extends Seeder
             'middleName' => '',
             'lastName' => 'Lopez',
             'contactNo' => '09279679229',
-            'email' => 'glopez@fujitsu.ten'
+            'email' => 'glopez@fujitsu.ten',
+            'photo' => 'pics/steve.jpg'
         ]);
         DB::table('user_detail')->insert([
             'userId' => 7,
@@ -65,7 +71,8 @@ class UserDetailSeeder extends Seeder
             'middleName' => '',
             'lastName' => 'Erni',
             'contactNo' => '09053530500',
-            'email' => 'naerni@pup.edu.ph'
+            'email' => 'naerni@pup.edu.ph',
+            'photo' => 'pics/steve.jpg'
         ]);
         DB::table('user_detail')->insert([
             'userId' => 8,
@@ -73,7 +80,8 @@ class UserDetailSeeder extends Seeder
             'middleName' => '',
             'lastName' => 'Pereyera',
             'contactNo' => '09054090523',
-            'email' => 'napereyra@fujitsu.ten'
+            'email' => 'napereyra@fujitsu.ten',
+            'photo' => 'pics/steve.jpg'
         ]);
         DB::table('user_detail')->insert([
             'userId' => 9,
@@ -81,7 +89,8 @@ class UserDetailSeeder extends Seeder
             'middleName' => '',
             'lastName' => 'Isorena',
             'contactNo' => '09054090523',
-            'email' => 'zi@pup.edu.ph'
+            'email' => 'zi@pup.edu.ph',
+            'photo' => 'pics/steve.jpg'
         ]);
     }
 }
