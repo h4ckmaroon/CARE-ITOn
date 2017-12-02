@@ -54,6 +54,14 @@
        
           </div>
         </div>
+
+         <img class="selector" id="webcamimg" src="../pics/vidcam.png" onclick="setwebcam()" align="left" style="opacity: 1;">
+  <img class="selector" id="qrimg" src="../pics/cam.png" onclick="setimg()" align="right" style="opacity: 0.2;">
+  <div id = "outdiv">
+  <video id="v" autoplay></video>
+  </div>
+  <div id = "result">- scanning -</div>
+
  
 
 </div>
@@ -63,6 +71,7 @@
     <script src="{{ URL::asset('assets/datatables/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('assets/datatables/datatables-responsive/js/dataTables.responsive.js') }}"></script>
+     <script src = "{{ URL::asset('/qrcodes/webqr.js') }} " ></script>
     <script>
         $(document).ready(function (){
             $('#listRates').DataTable({
