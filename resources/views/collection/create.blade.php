@@ -13,7 +13,7 @@
 @section('content')
 
 
-<div class = "col-row" style = "display: inline;" >
+<div class = "col-row" style = "display: inline;" id = "mainbody" >
 <table class="tsel" border="0" width="100%">
 	<tbody>
 		<tr>

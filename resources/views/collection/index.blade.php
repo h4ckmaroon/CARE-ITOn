@@ -16,6 +16,10 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title"></h3>
+                <div class="box-tools pull-right">
+                    <a class="btn btn-success btn-md" href = "/collection/create">
+                    <i class="glyphicon glyphicon-plus"></i> Scan Request Code</a>
+                </div>
             </div>
             <div class="box-body dataTable_wrapper">
                 @if(Auth::user()->id==2){

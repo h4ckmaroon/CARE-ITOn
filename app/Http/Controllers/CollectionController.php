@@ -37,7 +37,7 @@ class CollectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
 
          return View('collection.create');
