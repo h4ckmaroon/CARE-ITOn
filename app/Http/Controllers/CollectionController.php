@@ -61,4 +61,17 @@ class CollectionController extends Controller
             
             return $result;
     }
+
+
+    public function transferFund($id)
+    {
+        $collection = CollectionHeader::findOrFail($id);
+        $subtotal = 0.0;
+
+        foreach($details as $detail){
+            $subtotal = $detail->quantity * $detail->item->rate;
+        }
+
+        return View('collection.transferFund', compact($collection,$subtotal));
+    }
 }
