@@ -43,7 +43,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        CARE-ITOn
+                        <img src="{{ asset('pics/title-black.png')}}" width="100px" height="25px">
                     </a>
                 </div>
 
