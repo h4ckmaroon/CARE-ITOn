@@ -127,6 +127,9 @@
         <li id="mCollector">
           <a href="{{url('/collector')}}"><i class="fa fa-circle-o"></i> Manage Collectors</a>
         </li>
+        <li id="tCollection">
+          <a href="{{url('/routes')}}"><i class="fa fa-circle-o"></i> Routes</a>
+        </li>
         @endif
         @if($userLog->userType==2)
         <li id="tRequest">

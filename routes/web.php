@@ -45,4 +45,5 @@ Route::group(['middleware'=>'auth'],function(){
     Route::resource('/collection','CollectionController');
 
     Route::post('/collection','CollectionController@checkCode');
+    Route::resource('/routes','RouteController');
 });
