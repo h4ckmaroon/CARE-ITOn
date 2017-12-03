@@ -48,14 +48,20 @@ class CollectionController extends Controller
     public function checkCode(Request $request){
         $result =0;
             if ($request->data) {
-                $isExist = true;
+             
                 $isExist = RequestHeader::where('qrCode',$request->data)->first();
-                if ($isExist) {
-                  
-                    $result =1;
-                 }else{
-                    $result =0;
-                 }
+                if(count($isExist) > 0)
+                {
+                    if ($isExist) {
+                      
+                        $result =1;
+                     }else{
+                        $result =0;
+                     }
+                }
+                
+
+
                 
             }
             

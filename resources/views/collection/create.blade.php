@@ -8,13 +8,18 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/datatables/datatables-responsive/css/dataTables.responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/plugins/pace/pace.min.css') }}">
+
+#v{
+	height : 320px;
+	width : 240px;
+}
 @endsection
 
 @section('content')
 
 
 <div class = "col-row" style = "display: inline;" id = "mainbody" >
-<table class="tsel" border="0" width="100%">
+<table class="tsel" border="0" width="50%">
 	<tbody>
 		<tr>
 			<td valign="top" align="center" width="50%">
@@ -38,6 +43,15 @@
 		</tr>
 	</tbody>
 </table>
+
+<hr>
+
+<div class = "col-row" align="center">
+	<p> OR </p><br>
+	<input type="text" id="qrCode" > 
+	<a class="btn btn-primary btn-md" id="btnSearch">Search</a>
+</div>
+
 </div>
 
 <canvas id="qr-canvas" width="800" height="600" style="width: 800px; height: 600px;"></canvas>
@@ -55,7 +69,7 @@
 <script src = "{{ URL::asset('/qrcodes/webqr.js') }} " ></script>
 <script type="text/javascript">
 
- var getCode = document.getElementById('result');
+ 	var getCode = document.getElementById('result');
 
            if (getCode.innerHTML != "- scanning -" ){
            		$.ajax({
@@ -64,7 +78,7 @@
                     url : "{{action('CollectionController@checkCode')}}",
                     data: {data:getCode},
                         success: function(data) {
-                          console.log(data);
+                          alert(data);
                           if (data==1) {
 
                            alert('Request Found!');
@@ -76,6 +90,34 @@
                         }
            		});
            }
+
+	$('#btnSearch').on('click',function(){
+		 var qrcode = $('#qrCode').val();
+	
+		if (qrcode != ""){
+           		$.ajax({
+           		type: "GET",
+                    cache: false,
+                    url : "{{action('CollectionController@checkCode')}}",
+                    data: {data:qrcode},
+                        success: function(data) {
+                          
+                          if (data==1) {
+
+                           alert('Request Found!');
+                           
+                          }else{
+                          	alert('Record not found!');
+                          }
+                          
+                        }
+           		});
+        }
+
+        else{
+        	alert('Input Request Code');
+        }
+	});
 
 </script>
 @stop
