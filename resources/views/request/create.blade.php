@@ -20,6 +20,7 @@
 @section('content')
     <div class="col-row">
         <div class="col-md-6">
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
             <div id="map">
             </div>
         </div>
@@ -137,6 +138,8 @@
             // var directionsDisplay new google.maps.DirectionsRenderer();
             // var directionsService = new google.maps.DirectionsService();
 
+            // Create the search box and link it to the UI element.
+            
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 13,
                 center: {lat: 14.6760, lng: 121.0437}
@@ -145,6 +148,58 @@
             // $.get("https://maps.googleapis.com/maps/api/geocode/json?address=quezon+city&key=AIzaSyCK-FOiYk3WPwzrZYbqQ8z6m2zW7Ytc2bk", function(data, status){
             //     alert("Data: " + data + "\nStatus: " + status);
             // });
+
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function() {
+              searchBox.setBounds(map.getBounds());
+            });
+
+            // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          gmarkers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          gmarkers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+
+            // Create a marker for each place.
+            gmarkers.push(new google.maps.Marker({
+              map: map,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            loc = place.geometry.location;
+            $('#loc').val(loc.lat() + "," + loc.lng());
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
 
             var i = 0;
             var marker = null;
@@ -233,6 +288,6 @@
 
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK-FOiYk3WPwzrZYbqQ8z6m2zW7Ytc2bk&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK-FOiYk3WPwzrZYbqQ8z6m2zW7Ytc2bk&libraries=places&callback=initMap"
     async defer></script>
 @endsection
