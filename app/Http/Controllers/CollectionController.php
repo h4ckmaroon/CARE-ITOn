@@ -37,7 +37,7 @@ class CollectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
         
     }
@@ -97,5 +97,18 @@ class CollectionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function transferFund($id)
+    {
+        $collection = CollectionHeader::findOrFail($id);
+        $subtotal = 0.0;
+
+        foreach($details as $detail){
+            $subtotal = $detail->quantity * $detail->item->rate;
+        }
+
+        return View('collection.transferFund', compact($collection,$subtotal));
     }
 }
