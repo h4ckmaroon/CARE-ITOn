@@ -101,7 +101,8 @@
           <img src="{{asset('pics/careiton-small.png')}}" class="img-circle">
         </div>
         <div class="pull-left info">
-          <p>{{$wholeName}} - @if($userLog->userType==1){{"Administrator"}}@endif @if($userLog->userType==2){{"Customer"}}@endif @if($userLog->userType==3){{"Collector"}}@endif</p>
+          <p>{{$wholeName}}</p>
+          <p>@if($userLog->userType==1){{"Administrator"}}@endif @if($userLog->userType==2){{"Customer"}}@endif @if($userLog->userType==3){{"Collector"}}@endif</p>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->

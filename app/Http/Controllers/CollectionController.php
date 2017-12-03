@@ -27,13 +27,9 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
-        $user = User::find($id);
-        $collections = [];
-        if($user->userType==2){
-            $collections = CollectionHeader::get();
-        }
-        return View('collection.index',compact('collections'));
+        $collections = CollectionHeader::get();
+        $requests = RequestHeader::get();
+        return View('collection.index',compact('collections','requests'));
     }
 
     /**
@@ -41,9 +37,9 @@ class CollectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        
     }
 
     /**
@@ -76,7 +72,8 @@ class CollectionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $request = RequestHeader::findOrFail($id);
+        return View('collection.create',compact('request'));
     }
 
     /**
