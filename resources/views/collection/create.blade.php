@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    {{"Scan Request"}}
+    {{"Scan Request Code"}}
 @stop
 
 @section('style')
@@ -45,7 +45,9 @@
 <script src = "{{ URL::asset('/qrcodes/llqrcode.js') }} " ></script>
 <script src = "{{ URL::asset('/qrcodes/webqr.js') }} " ></script>
 <script type="text/javascript">
+
  var getCode = document.getElementById('result');
+
            if (getCode.innerHTML != "- scanning -" ){
            		$.ajax({
            		type: "POST",
@@ -55,8 +57,9 @@
                         success: function(data) {
                           console.log(data);
                           if (data==1) {
+
                            alert('Request Found!');
-                           location.
+                           
                           }else{
                            $('#result').html('<span class="text-danger"> QR Code not registered</span>');
                           }
