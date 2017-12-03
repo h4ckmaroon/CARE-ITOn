@@ -29,7 +29,6 @@ Route::resource('/register-user','RegisterUserController',['only' => [
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('/dashboard','DashboardController',['only' => [
         'index']]);
-    Route::post('/dashboard','DashboardController@checkCode');
     Route::resource('/category','ItemCategoryController',['only' => [
         'index','store','edit','update','destroy']]);
     Route::patch('/category/{$id}','ItemCategoryController@reactivate');
@@ -44,4 +43,6 @@ Route::group(['middleware'=>'auth'],function(){
     Route::patch('/collector/{$id}','CollectorController@reactivate');   
     Route::resource('/request','RequestController');
     Route::resource('/collection','CollectionController');
+
+    Route::post('/collection','CollectionController@checkCode');
 });

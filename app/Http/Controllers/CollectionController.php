@@ -44,6 +44,7 @@ class CollectionController extends Controller
     public function create()
     {
         //
+         return View('collection.create');
     }
 
     /**
@@ -100,5 +101,22 @@ class CollectionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function checkCode(Request $request){
+        $result =0;
+            if ($request->data) {
+                $isExist = true;
+                $isExist = RequestHeader::where('qrCode',$request->data)->first();
+                if ($isExist) {
+                  
+                    $result =1;
+                 }else{
+                    $result =0;
+                 }
+                
+            }
+            
+            return $result;
     }
 }
