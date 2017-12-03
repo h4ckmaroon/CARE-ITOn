@@ -39,6 +39,15 @@
 	</tbody>
 </table>
 </div>
+
+<canvas id="qr-canvas" width="800" height="600" style="width: 800px; height: 600px;"></canvas>
+<script type="text/javascript">load();</script>
+
+<style type="text/css">
+	#qr-canvas:{
+		display: none;
+	}
+</style>
 @stop
 
 @section('scripts')
