@@ -110,19 +110,7 @@
 
             for(var j = 0; j < requests.length; j++)
             {
-                var latLng = requests[j].location.split(",");
-                var marker = new google.maps.Marker({
-                position: {lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1])},
-                map: map
-                });
-                google.maps.event.addListener(marker, "click", function (e) {
-                var content = 'Latitude: ' + latLng[0] + '<br />Longitude: ' + latLng[1];
-                    var infoWindow = new google.maps.InfoWindow({
-                        content: content
-                    });
-                infoWindow.open(map, marker);
-                gmarkers.push(marker);
-            });
+                createMarker(j);
             }
 
             
@@ -185,6 +173,23 @@
             //     }
             //   });
             calculateAndDisplayRoute(directionsService, directionsDisplay);
+        }
+
+        function createMarker(j)
+        {
+            var latLng = requests[j].location.split(",");
+                var marker = new google.maps.Marker({
+                position: {lat: parseFloat(latLng[0]), lng: parseFloat(latLng[1])},
+                map: map
+                });
+                google.maps.event.addListener(marker, "click", function (e) {
+                var content = 'Latitude: ' + latLng[0] + '<br />Longitude: ' + latLng[1];
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: content
+                    });
+                infoWindow.open(map, marker);
+                gmarkers.push(marker);
+            });
         }
 
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
