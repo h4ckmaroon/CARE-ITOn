@@ -39,64 +39,27 @@ class CollectionController extends Controller
      */
     public function create()
     {
-        
+
+         return View('collection.create');
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $request = RequestHeader::findOrFail($id);
-        return View('collection.create',compact('request'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    
+    public function checkCode(Request $request){
+        $result =0;
+            if ($request->data) {
+                $isExist = true;
+                $isExist = RequestHeader::where('qrCode',$request->data)->first();
+                if ($isExist) {
+                  
+                    $result =1;
+                 }else{
+                    $result =0;
+                 }
+                
+            }
+            
+            return $result;
     }
 
 

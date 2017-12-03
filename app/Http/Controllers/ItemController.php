@@ -69,7 +69,7 @@ class ItemController extends Controller
                 DB::beginTransaction();
                 Item::create([
                     'name' => trim($request->name),
-                    'rate' => trim($request->rate),
+                    'rate' => trim(str_replace(',','',$request->rate)),
                     'categoryId' => $request->categoryId,
                     'description' => trim($request->description)
                 ]);
